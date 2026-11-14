@@ -51,7 +51,9 @@ function daysAgo(days: number): string {
 }
 
 /** A learner who bought the course `slug` with the given purchase date. */
-function seedPurchase(options: { purchasedAt?: string } = {}) {
+function seedPurchase(
+  options: { purchasedAt?: string; amountPaid?: number } = {}
+) {
   const instructor = db
     .insert(schema.users)
     .values({
@@ -94,7 +96,7 @@ function seedPurchase(options: { purchasedAt?: string } = {}) {
     .values({
       userId: learner.id,
       courseId: course.id,
-      amountPaid: 10000,
+      amountPaid: options.amountPaid ?? 10000,
       createdAt: options.purchasedAt ?? daysAgo(1),
     })
     .returning()
@@ -233,5 +235,23 @@ describe("submitting a Refund Request", () => {
         },
       },
     });
+  });
+
+  it("emails the learner the amount they paid, not the course's current price", async () => {
+    // A full-price purchase (no purchasing-power country) made when the course
+    // cost $79.00; the course's list price has since gone up to $100.00.
+    const { learner } = seedPurchase({ amountPaid: 7900 });
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+
+    try {
+      await submitRefundRequest({ userId: learner.id });
+
+      const logged = log.mock.calls.map((call) => String(call[0])).join("\n");
+      expect(logged).toContain("to=lena@example.com");
+      expect(logged).toContain("$79.00, the amount you paid");
+      expect(logged).not.toContain("$100.00");
+    } finally {
+      log.mockRestore();
+    }
   });
 });

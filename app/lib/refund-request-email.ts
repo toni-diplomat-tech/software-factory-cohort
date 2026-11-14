@@ -9,7 +9,7 @@ export function buildRefundRequestEmail(input: {
   learnerName: string;
   learnerEmail: string;
   courseTitle: string;
-  amount: number;
+  refundableAmount: number;
 }) {
   return {
     to: input.learnerEmail,
@@ -18,7 +18,7 @@ export function buildRefundRequestEmail(input: {
       `Hi ${input.learnerName},`,
       "",
       `We have your Refund Request for "${input.courseTitle}".`,
-      `The Refund is for ${formatPrice(input.amount)}, the amount you paid.`,
+      `If your Refund Request is approved, we will refund ${formatPrice(input.refundableAmount)}, the amount you paid.`,
       "",
       "Our team reviews every Refund Request by hand. You do not need to do anything else — we will email you again when it is done.",
       "",

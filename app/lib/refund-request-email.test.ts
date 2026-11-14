@@ -5,7 +5,7 @@ const input = {
   learnerName: "Ada",
   learnerEmail: "ada@example.com",
   courseTitle: "Intro to TypeScript",
-  amount: 4900,
+  refundableAmount: 4900,
 };
 
 describe("buildRefundRequestEmail", () => {
@@ -19,12 +19,15 @@ describe("buildRefundRequestEmail", () => {
     );
   });
 
-  it("talks about the Refund Request and the Refund, with the amount", () => {
+  it("says the Refund of the amount paid only follows an approved Refund Request", () => {
     const { body } = buildRefundRequestEmail(input);
     expect(body).toContain(
       'We have your Refund Request for "Intro to TypeScript".'
     );
-    expect(body).toContain("The Refund is for $49.00, the amount you paid.");
+    expect(body).toContain(
+      "If your Refund Request is approved, we will refund $49.00, the amount you paid."
+    );
+    expect(body).not.toMatch(/The Refund is for/);
   });
 
   it("never uses avoided terms", () => {
