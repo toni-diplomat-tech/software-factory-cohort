@@ -17,7 +17,7 @@ import {
 import { and, eq, inArray, isNotNull, sql } from "drizzle-orm";
 import { parseFormData, parseParams } from "~/lib/validation";
 import { getDiscountForCountry } from "~/lib/ppp";
-import { formatPrice } from "~/lib/utils";
+import { buildRefundRequestEmail } from "~/lib/refund-request-email";
 
 const REFUND_WINDOW_DAYS = 14;
 const MAX_WATCHED_HOURS = 2;
@@ -83,32 +83,6 @@ function lastDayOfWindow(purchasedAtIso: string): string {
   const deadline = new Date(purchasedAtIso);
   deadline.setDate(deadline.getDate() + REFUND_WINDOW_DAYS);
   return calendarDay(deadline);
-}
-
-/**
- * The confirmation the learner gets in their inbox. There is no mail
- * transport wired up yet, so the built message goes to the server log.
- */
-function buildReversalEmail(input: {
-  learnerName: string;
-  learnerEmail: string;
-  courseTitle: string;
-  amount: number;
-}) {
-  return {
-    to: input.learnerEmail,
-    subject: `Reversal requested — ${input.courseTitle}`,
-    body: [
-      `Hi ${input.learnerName},`,
-      "",
-      `We have your Reversal request for "${input.courseTitle}".`,
-      `The Reversal is for ${formatPrice(input.amount)}, the amount you paid.`,
-      "",
-      "Our team reviews every Reversal by hand. You do not need to do anything else — we will email you again when it is done.",
-      "",
-      "— The Cadence team",
-    ].join("\n"),
-  };
 }
 
 export async function action({ params, request }: Route.ActionArgs) {
@@ -222,7 +196,7 @@ export async function action({ params, request }: Route.ActionArgs) {
     .returning()
     .get();
 
-  const email = buildReversalEmail({
+  const email = buildRefundRequestEmail({
     learnerName: learner.name,
     learnerEmail: learner.email,
     courseTitle: course.title,
