@@ -58,7 +58,7 @@ function getLessonIdsForCourse(courseId: number): number[] {
   return rows.map((row) => row.id);
 }
 
-function getOpenRefund(purchaseId: number) {
+function getRequestedRefundRequest(purchaseId: number) {
   return db
     .select()
     .from(refunds)
@@ -115,7 +115,7 @@ export async function action({ params, request }: Route.ActionArgs) {
     throw data("You have not bought this course.", { status: 403 });
   }
 
-  if (getOpenRefund(purchase.id)) {
+  if (getRequestedRefundRequest(purchase.id)) {
     throw data("You have already requested a refund for this purchase.", {
       status: 409,
     });
@@ -197,7 +197,7 @@ export async function action({ params, request }: Route.ActionArgs) {
     learnerName: learner.name,
     learnerEmail: learner.email,
     courseTitle: course.title,
-    amount: refundableAmount,
+    refundableAmount,
   });
 
   console.log(

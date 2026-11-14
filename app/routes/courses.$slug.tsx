@@ -441,10 +441,7 @@ function asDayString(when: Date) {
  * What the learner is offered if they want their money back, or null if this
  * learner cannot make a Refund Request for this purchase.
  */
-function getRefundOffer(
-  userId: number,
-  course: { id: number; price: number }
-) {
+function getRefundOffer(userId: number, course: { id: number }) {
   const purchase = getPurchaseForCourse(userId, course.id);
 
   if (!purchase) return null;
@@ -483,9 +480,9 @@ function getRefundOffer(
 
   if (claimedSeat) return null;
 
-  const amount = getRefundableAmount(purchase);
+  const refundableAmount = getRefundableAmount(purchase);
 
-  return { amount, lastDayInWindow };
+  return { refundableAmount, lastDayInWindow };
 }
 
 const ratingSchema = z.object({
@@ -520,16 +517,13 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   let progress = 0;
   let lessonProgressMap: Record<number, string> = {};
   let nextLessonId: number | null = null;
-  let refundOffer: { amount: number; lastDayInWindow: string } | null = null;
+  let refundOffer: ReturnType<typeof getRefundOffer> = null;
 
   if (currentUserId) {
     enrolled = isUserEnrolled(currentUserId, course.id);
 
     if (enrolled) {
-      refundOffer = getRefundOffer(currentUserId, {
-        id: course.id,
-        price: courseWithDetails.price,
-      });
+      refundOffer = getRefundOffer(currentUserId, course);
 
       progress = calculateProgress(currentUserId, course.id, false);
 
@@ -913,7 +907,7 @@ export default function CourseDetail({ loaderData }: Route.ComponentProps) {
                   {refundOffer && (
                     <RequestRefund
                       slug={course.slug}
-                      amount={refundOffer.amount}
+                      refundableAmount={refundOffer.refundableAmount}
                     />
                   )}
                 </>
@@ -987,7 +981,13 @@ function RateCourse({ userRating }: { userRating: number | null }) {
   );
 }
 
-function RequestRefund({ slug, amount }: { slug: string; amount: number }) {
+function RequestRefund({
+  slug,
+  refundableAmount,
+}: {
+  slug: string;
+  refundableAmount: number;
+}) {
   const fetcher = useFetcher<{ errors?: Record<string, string> }>();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const isSubmitting = fetcher.state !== "idle";
@@ -1018,7 +1018,7 @@ function RequestRefund({ slug, amount }: { slug: string; amount: number }) {
     <div className="border-t pt-4">
       <p className="mb-2 text-sm font-medium">Request a refund</p>
       <p className="mb-3 text-xs text-muted-foreground">
-        We will send {formatPrice(amount)} back to the card you paid with, once
+        We will send {formatPrice(refundableAmount)} back to the card you paid with, once
         someone has read your note.
       </p>
       <fetcher.Form
