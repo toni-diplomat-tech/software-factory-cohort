@@ -38,7 +38,7 @@ export function deriveNoteEditorState(input: NoteEditorInput): NoteEditorState {
     limit: MAX_NOTE_LENGTH,
     overLimit,
     // The server rejects blank and over-long notes; disabling Save here keeps
-    // the learner from a round trip that can only fail.
+    // the Student from a round trip that can only fail.
     canSave: dirty && !blank && !overLimit && !input.isSaving,
   };
 }
