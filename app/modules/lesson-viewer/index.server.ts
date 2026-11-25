@@ -1,5 +1,5 @@
 /**
- * The data behind the lesson page: the course outline, the learner's
+ * The data behind the lesson page: the course outline, the Student's
  * progress, the discussion thread and the lesson's quiz.
  */
 export {
