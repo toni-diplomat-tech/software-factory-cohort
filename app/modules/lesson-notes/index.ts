@@ -3,7 +3,7 @@
  * count against the limit, and whether Save is worth pressing.
  */
 export {
-  deriveNoteEditorState as noteEditorState,
+  noteEditorState,
   type NoteEditorInput,
   type NoteEditorState,
   type NoteStatus,

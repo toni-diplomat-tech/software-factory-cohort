@@ -30,7 +30,7 @@ function statusOf(
   return input.savedBody === null ? "empty" : "saved";
 }
 
-export function deriveNoteEditorState(input: NoteEditorInput): NoteEditorState {
+export function noteEditorState(input: NoteEditorInput): NoteEditorState {
   // The server trims a note before it checks and stores it, so compare and
   // count the trimmed draft: trailing whitespace is not an unsaved change.
   const body = input.draft.trim();
