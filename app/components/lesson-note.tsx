@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useFetcher } from "react-router";
 import { Check, Loader2, Lock, NotebookPen } from "lucide-react";
 import { Button } from "~/components/ui/button";
@@ -13,6 +13,8 @@ export function LessonNote({ note }: { note: SavedNote }) {
   const fetcher = useFetcher<{ ok: boolean; error?: string }>();
   const [draft, setDraft] = useState(note?.body ?? "");
   const [submittedDraft, setSubmittedDraft] = useState<string | null>(null);
+  const statusId = useId();
+  const counterId = useId();
   const state = noteEditorState({
     savedBody: note?.body ?? null,
     draft,
@@ -25,7 +27,9 @@ export function LessonNote({ note }: { note: SavedNote }) {
     <Card className="mb-8 gap-4 py-5">
       <CardHeader className="flex items-center justify-between gap-3 px-5">
         <NoteTitle />
-        <NoteStatusLabel state={state} updatedAt={note?.updatedAt} />
+        <output id={statusId}>
+          <NoteStatusLabel state={state} updatedAt={note?.updatedAt} />
+        </output>
       </CardHeader>
 
       <CardContent className="px-5">
@@ -38,9 +42,10 @@ export function LessonNote({ note }: { note: SavedNote }) {
             placeholder="Jot down key ideas, questions, or anything you want to remember from this lesson."
             aria-label="Your notes"
             aria-invalid={state.overLimit || undefined}
+            aria-describedby={`${statusId} ${counterId}`}
             className="min-h-32 resize-y leading-relaxed wrap-anywhere"
           />
-          <NoteFooter state={state} />
+          <NoteFooter state={state} counterId={counterId} />
         </fetcher.Form>
       </CardContent>
     </Card>
@@ -64,16 +69,29 @@ function NoteTitle() {
   );
 }
 
-function NoteFooter({ state }: { state: NoteEditorState }) {
+function NoteFooter({
+  state,
+  counterId,
+}: {
+  state: NoteEditorState;
+  counterId: string;
+}) {
   return (
     <div className="mt-3 flex items-center justify-end gap-3">
       <span
+        id={counterId}
         className={cn(
           "text-xs tabular-nums text-muted-foreground",
           state.overLimit && "font-medium text-destructive"
         )}
       >
         {state.length.toLocaleString("en")} / {state.limit.toLocaleString("en")}
+        <span className="sr-only"> characters</span>
+        {state.overLimit && (
+          <span className="sr-only">
+            , over the limit, so the note cannot be saved
+          </span>
+        )}
       </span>
       <Button type="submit" size="sm" disabled={!state.canSave}>
         {state.status === "saving" ? "Saving…" : "Save note"}
@@ -100,9 +118,7 @@ function NoteStatusLabel({
       );
     case "error":
       return (
-        <span role="alert" className={cn(base, "text-destructive")}>
-          {state.error}
-        </span>
+        <span className={cn(base, "text-destructive")}>{state.error}</span>
       );
     case "unsaved":
       return (
