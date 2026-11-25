@@ -4,8 +4,6 @@ Your ticket is /tmp/ticket.md: the issue, then comments from people with write
 access, including the explore run's findings. Read those findings before you
 open any code. Build the ticket, and only the ticket.
 
-Read CODING_STANDARDS.md.
-
 - Behaviour goes in a deep module under app/modules/, behind an entry point a
   test can call, never inline in a loader.
 - Ship tests with the code. End with more passing tests than you started

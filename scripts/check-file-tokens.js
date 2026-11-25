@@ -19,7 +19,12 @@ const isBinary = (contents) => contents.subarray(0, 8000).includes(0);
 
 const oversized = process.argv
   .slice(2)
-  .map((file) => file.replaceAll("\\", "/").replace(`${process.cwd()}/`, ""))
+  // Both sides use forward slashes, so a Windows path loses its prefix too.
+  .map((file) =>
+    file
+      .replaceAll("\\", "/")
+      .replace(`${process.cwd().replaceAll("\\", "/")}/`, "")
+  )
   .filter((file) => !IGNORED.some((pattern) => pattern.test(file)))
   .map((file) => ({ file, contents: readFileSync(file) }))
   .filter(({ contents }) => !isBinary(contents))

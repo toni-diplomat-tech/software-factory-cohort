@@ -162,6 +162,15 @@ jobs:
         if: steps.batch.outputs.numbers != '[]'
         run: npm install -g @anthropic-ai/claude-code
 
+      - name: Install agent-browser
+        # The agents drive the app with it (docs/agents/agent-browser.md).
+        # Installed here, a run spends no turns installing it or paying
+        # `npx -y` startup on every command.
+        if: steps.batch.outputs.numbers != '[]'
+        run: |
+          npm install -g agent-browser
+          agent-browser install
+
       - name: Explore
         if: steps.batch.outputs.numbers != '[]'
         env:

@@ -18,7 +18,7 @@ Form data, search parameters and request bodies get a zod schema before the
 values reach any query. Parse once, at the boundary; after that the value has
 a type and you do not check it again. Coerce numbers through the schema, not
 `Number()`: `Number("")` is `0`, and an empty `lessonId` once opened lesson 0
-for every learner.
+for every Student.
 
 ## Check permission in the action, not only the loader
 
@@ -32,8 +32,9 @@ Once a module owns a feature's data, the route asks the module for it and
 does not import `~/db` or `drizzle-orm` itself. The instructor analytics
 route gets everything from `instructorAnalytics`. A query in the loader
 splits the feature's rules across two files, and the module's tests stop
-covering what the page shows. `npm run lint:boundaries` enforces this for the
-instructor analytics route only; apply it to every other module by hand. See
+covering what the page shows. `npm run lint:boundaries` fails a route that
+imports the database connection, except the routes listed in
+`.dependency-cruiser-known-violations.json`, which predate the rule. See
 [app/modules/README.md](./app/modules/README.md).
 
 ## Arrange tests through the module under test
@@ -51,7 +52,7 @@ Keep every file under 5000 tokens.
 Two writes that must both land, or neither, go in a transaction. If the second
 one fails and the first stayed, you have invented a state nothing knows how to
 read. (The refund bug: the refund was approved, the enrollment was never
-ended, and the learner kept the course.)
+ended, and the Student kept the course.)
 
 ## Do not read from the database in a loop
 
@@ -68,7 +69,7 @@ limit. The instructor's students page timed out on the first big course.
 
 If another row references it, or a person has a link to it, do not delete it.
 Mark it deleted and filter it out on read. Deleting a lesson used to take the
-learners' notes and bookmarks with it.
+Students' notes and bookmarks with it.
 
 ## Enumerations live in the schema file
 
@@ -80,7 +81,7 @@ files and `"Pending"` in one.
 
 A function that calls `Date.now()` cannot be tested at a fixed moment. Take
 the time as an argument. The refund window tests failed every night at
-midnight until we did this.
+midnight until we did this. `npm run lint:oxlint` enforces this in `app/modules/`.
 
 ## Keep secrets on the server
 
@@ -106,6 +107,20 @@ const [count, setCount] = useState(rows.length);
 const [items, setItems] = useState(rows);
 const count = items.length;
 ```
+
+## A status message describes the current state
+
+A message the UI shows about the last request (an error, "Saved") describes
+the input that request sent. Once that input changes, the message no longer
+applies: clear it, or derive it from the input. A save error that outlived
+the Student's next edit left the note card stuck on the error, with
+"Unsaved changes" never coming back.
+
+## Exercise a UI change at its extremes
+
+A form or a display is checked empty, at its limit, over its limit, and with
+one long unbroken line (a URL, or 2,001 × "x"). A note textarea once passed
+every normal case and then pushed the whole page sideways on a long line.
 
 ## A comment explains why
 

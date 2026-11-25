@@ -306,6 +306,14 @@ jobs:
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
 
+      - name: Install agent-browser
+        # The agents drive the app with it (docs/agents/agent-browser.md).
+        # Installed here, a run spends no turns installing it or paying
+        # `npx -y` startup on every command.
+        run: |
+          npm install -g agent-browser
+          agent-browser install
+
       - name: Decompose the spec into a queue
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -411,6 +419,14 @@ jobs:
 
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
+
+      - name: Install agent-browser
+        # The agents drive the app with it (docs/agents/agent-browser.md).
+        # Installed here, a run spends no turns installing it or paying
+        # `npx -y` startup on every command.
+        run: |
+          npm install -g agent-browser
+          agent-browser install
 
       - name: Migrate and seed the database
         run: |

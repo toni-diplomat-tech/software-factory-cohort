@@ -23,7 +23,7 @@
  * result.
  */
 import { execFileSync } from "node:child_process";
-import { existsSync, statSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 /**
@@ -256,4 +256,44 @@ try {
 } catch (error) {
   const status = (error as { status?: number }).status;
   process.exit(typeof status === "number" ? status : 1);
+}
+
+/**
+ * A NoCoverage mutant in a module is code no test reaches, and a module is
+ * where behaviour lives behind an entry point a test can call. So the run
+ * fails on it: code moved into a module, or written there, gets its tests
+ * with it. (`app/lib/` and `request-logger/` predate that rule.)
+ */
+type Report = {
+  files: Record<
+    string,
+    { mutants: { status: string; location: { start: { line: number } } }[] }
+  >;
+};
+const report: Report = JSON.parse(
+  readFileSync(resolve(repoRoot, "reports/mutation/mutation.json"), "utf8")
+);
+const uncovered = Object.entries(report.files)
+  .map(([file, { mutants }]) => ({
+    file: file.replaceAll("\\", "/"),
+    lines: [
+      ...new Set(
+        mutants
+          .filter(({ status }) => status === "NoCoverage")
+          .map(({ location }) => location.start.line)
+      ),
+    ],
+  }))
+  .filter(({ file, lines }) => file.startsWith("app/modules/") && lines.length);
+
+if (uncovered.length > 0) {
+  console.error("\nNo test reaches these lines of module code (NoCoverage):\n");
+  for (const { file, lines } of uncovered) {
+    console.error(`  ${file}: lines ${lines.join(", ")}`);
+  }
+  console.error(
+    "\nTest them through the module's entry point. Code moved into a module " +
+      "gets its tests with it."
+  );
+  process.exit(1);
 }

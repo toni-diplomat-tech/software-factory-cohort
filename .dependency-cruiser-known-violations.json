@@ -1,0 +1,792 @@
+[
+  {
+    "type": "dependency",
+    "from": "app/routes/admin.categories.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/admin.categories.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/admin.courses.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/admin.courses.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/admin.refunds.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/admin.users.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/admin.users.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/api.video-tracking.ts",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.$moduleId.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.$moduleId.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.lessons.$lessonId.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.lessons.$lessonId.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.purchase.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.purchase.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.refund.ts",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.refund.ts",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.welcome.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.$slug.welcome.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/courses.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/dashboard.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/dashboard.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/home.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/home.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.lessons.$lessonId.quiz.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.lessons.$lessonId.quiz.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.lessons.$lessonId.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.lessons.$lessonId.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.modules.$moduleId.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.modules.$moduleId.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.students.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.students.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.$courseId.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.new.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.new.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.questions.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.questions.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.questions.tsx",
+    "to": "node_modules/drizzle-orm/sqlite-core/index.js",
+    "unresolvedTo": "drizzle-orm/sqlite-core",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/instructor.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/layout.app.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/layout.app.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/login.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/login.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/redeem.$code.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/redeem.$code.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/saved.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/settings.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/settings.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/signup.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/signup.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/team.tsx",
+    "to": "app/db/index.ts",
+    "unresolvedTo": "~/db",
+    "dependencyTypes": [
+      "aliased",
+      "aliased-tsconfig",
+      "aliased-tsconfig-paths",
+      "local",
+      "import"
+    ],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  },
+  {
+    "type": "dependency",
+    "from": "app/routes/team.tsx",
+    "to": "node_modules/drizzle-orm/index.cjs",
+    "unresolvedTo": "drizzle-orm",
+    "dependencyTypes": ["npm", "import"],
+    "rule": {
+      "severity": "error",
+      "name": "routes-no-db-connection"
+    }
+  }
+]

@@ -29,7 +29,7 @@ function githubRepoFromRemote(remoteUrl: string) {
 
 // `gh` on its own may pick the course repo: `npm run reset` and
 // `cherry-pick` add an `upstream` remote, and gh prefers it. Feedback is
-// for the learner's own repo, so the target is always origin's.
+// for this copy of the repo, so the target is always origin's.
 async function originRepo(run: RunCommand) {
   const remote = await run("git", ["remote", "get-url", "origin"]);
   const repo = githubRepoFromRemote(remote);

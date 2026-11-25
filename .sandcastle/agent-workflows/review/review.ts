@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { appendFileSync } from "node:fs";
 import * as path from "node:path";
 import * as sandcastle from "@ai-hero/sandcastle";
 import { noSandbox } from "@ai-hero/sandcastle/sandboxes/no-sandbox";
@@ -10,6 +11,8 @@ import { diffLines } from "./diff-lines";
 import { reviewSchema } from "./review-schema";
 
 const BASE_REF = required("BASE_REF");
+// The prompt names this path; the workflow posts it as the verdict comment.
+const VERDICT = "/tmp/review-verdict.md";
 
 // The agent fixes and commits, writes the verdict file, and hands back the
 // findings it left. The workflow pushes the commits, posts the verdict and
@@ -35,11 +38,29 @@ const git = (...args: string[]): string =>
 // The diff after the agent's commits: the comments land on that.
 const hunks = diffLines(git("diff", `origin/${BASE_REF}...HEAD`));
 const { comments: found }: z.infer<typeof reviewSchema> = result.output;
-const comments = found.filter(({ path: file, line }) => {
-  if (hunks.get(file)?.has(line)) return true;
-  console.error(`Dropping the comment on ${file}:${line}: not in the diff.`);
-  return false;
-});
+const inDiff = ({ path: file, line }: { path: string; line: number }) =>
+  hunks.get(file)?.has(line) ?? false;
+const comments = found.filter(inDiff);
+
+// GitHub rejects a review with a comment outside the diff, and the verdict
+// holds only a count of the left findings, so a comment GitHub cannot take
+// goes into the verdict instead of disappearing.
+const outside = found.filter((comment) => !inDiff(comment));
+if (outside.length > 0) {
+  console.error(
+    `${outside.length} comment(s) outside the diff go in the verdict.`
+  );
+  appendFileSync(
+    VERDICT,
+    [
+      "\n## Findings outside the diff\n",
+      ...outside.map(
+        ({ path: file, line, body }) => `- \`${file}:${line}\`: ${body}`
+      ),
+      "",
+    ].join("\n")
+  );
+}
 
 // The request body for POST /repos/{owner}/{repo}/pulls/{n}/reviews.
 writeJson("review-comments.json", {

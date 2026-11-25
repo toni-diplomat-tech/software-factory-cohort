@@ -95,6 +95,19 @@ module.exports = {
       to: { path: ["^app/db/", "^node_modules/(drizzle-orm|better-sqlite3)/"] },
     },
     {
+      name: "routes-no-db-connection",
+      comment:
+        "CODING_STANDARDS.md, A route does not query data a module owns: a route asks a module under app/modules/ for its data. Routes that already query are listed in .dependency-cruiser-known-violations.json; move one to a module and regenerate that file to take it off the list.",
+      severity: "error",
+      from: { path: "^app/routes/" },
+      to: {
+        path: [
+          "^app/db/index\\.ts$",
+          "^node_modules/(drizzle-orm|better-sqlite3)/",
+        ],
+      },
+    },
+    {
       name: "components-no-db-connection",
       comment:
         "Components ship to the browser, so they may not open the database connection: it pulls better-sqlite3 into the client bundle and breaks hydration. Get data through a loader instead.",

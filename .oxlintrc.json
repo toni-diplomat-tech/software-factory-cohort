@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "react", "jsx-a11y", "import", "vitest"],
-  "jsPlugins": ["./lint-rules/sql-raw.js"],
+  "jsPlugins": ["./lint-rules/sql-raw.js", "./lint-rules/clock.js"],
   "categories": {
     "correctness": "error"
   },
@@ -89,6 +89,31 @@
     "sql/no-dynamic-raw": "error"
   },
   "overrides": [
+    // CODING_STANDARDS.md, "Inject the clock". Module code takes `now`.
+    {
+      "files": ["app/modules/**"],
+      "rules": {
+        "clock/no-ambient-time": "error"
+      }
+    },
+    // A shared component declares the props it needs. Importing a route's
+    // generated types makes it depend on that one route.
+    {
+      "files": ["app/components/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["**/+types/*"],
+                "message": "A shared component declares its own props type. A route's generated +types tie it to that route."
+              }
+            ]
+          }
+        ]
+      }
+    },
     {
       "files": [
         "app/routes/**",
@@ -105,7 +130,8 @@
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
       "rules": {
-        "max-lines-per-function": "off"
+        "max-lines-per-function": "off",
+        "clock/no-ambient-time": "off"
       }
     },
     {

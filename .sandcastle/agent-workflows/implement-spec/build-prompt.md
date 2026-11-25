@@ -6,8 +6,6 @@ ticket out of a queue.
 - /tmp/spec.md: the spec it came from, for context only. Other tickets cover
   the rest of it.
 
-Read CODING_STANDARDS.md.
-
 - Behaviour goes in a deep module under app/modules/, behind an entry point a
   test can call, never inline in a loader.
 - Tests ship in this ticket. End with more passing tests than you started
