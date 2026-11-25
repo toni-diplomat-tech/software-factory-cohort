@@ -7,19 +7,25 @@ export type NoteEditorInput = {
   draft: string;
   isSaving: boolean;
   error: string | undefined;
+  submittedDraft: string | null;
 };
 
 export type NoteEditorState = {
   status: NoteStatus;
+  error: string | undefined;
   length: number;
   limit: number;
   overLimit: boolean;
   canSave: boolean;
 };
 
-function statusOf(input: NoteEditorInput, dirty: boolean): NoteStatus {
+function statusOf(
+  input: NoteEditorInput,
+  error: string | undefined,
+  dirty: boolean
+): NoteStatus {
   if (input.isSaving) return "saving";
-  if (input.error) return "error";
+  if (error) return "error";
   if (dirty) return "unsaved";
   return input.savedBody === null ? "empty" : "saved";
 }
@@ -32,8 +38,12 @@ export function deriveNoteEditorState(input: NoteEditorInput): NoteEditorState {
   const overLimit = length > MAX_NOTE_LENGTH;
   const dirty = body !== (input.savedBody ?? "");
   const blank = body === "";
+  // A failed save's error describes the draft that was sent. Once the Student
+  // edits it, the error no longer applies and the status goes back to unsaved.
+  const error = input.draft === input.submittedDraft ? input.error : undefined;
   return {
-    status: statusOf(input, dirty),
+    status: statusOf(input, error, dirty),
+    error,
     length,
     limit: MAX_NOTE_LENGTH,
     overLimit,

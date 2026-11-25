@@ -12,26 +12,24 @@ type SavedNote = { body: string; updatedAt: string } | null;
 export function LessonNote({ note }: { note: SavedNote }) {
   const fetcher = useFetcher<{ ok: boolean; error?: string }>();
   const [draft, setDraft] = useState(note?.body ?? "");
+  const [submittedDraft, setSubmittedDraft] = useState<string | null>(null);
   const state = noteEditorState({
     savedBody: note?.body ?? null,
     draft,
     isSaving: fetcher.state !== "idle",
     error: fetcher.data?.error,
+    submittedDraft,
   });
 
   return (
     <Card className="mb-8 gap-4 py-5">
       <CardHeader className="flex items-center justify-between gap-3 px-5">
         <NoteTitle />
-        <NoteStatusLabel
-          state={state}
-          updatedAt={note?.updatedAt}
-          error={fetcher.data?.error}
-        />
+        <NoteStatusLabel state={state} updatedAt={note?.updatedAt} />
       </CardHeader>
 
       <CardContent className="px-5">
-        <fetcher.Form method="post">
+        <fetcher.Form method="post" onSubmit={() => setSubmittedDraft(draft)}>
           <input type="hidden" name="intent" value="save-note" />
           <Textarea
             name="body"
@@ -87,11 +85,9 @@ function NoteFooter({ state }: { state: NoteEditorState }) {
 function NoteStatusLabel({
   state,
   updatedAt,
-  error,
 }: {
   state: NoteEditorState;
   updatedAt: string | undefined;
-  error: string | undefined;
 }) {
   const base = "flex items-center gap-1.5 text-right text-xs";
   switch (state.status) {
@@ -105,7 +101,7 @@ function NoteStatusLabel({
     case "error":
       return (
         <span role="alert" className={cn(base, "text-destructive")}>
-          {error}
+          {state.error}
         </span>
       );
     case "unsaved":

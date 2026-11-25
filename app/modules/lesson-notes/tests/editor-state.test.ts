@@ -8,6 +8,7 @@ function state(overrides: Partial<NoteEditorInput>) {
     draft: "",
     isSaving: false,
     error: undefined,
+    submittedDraft: null,
     ...overrides,
   });
 }
@@ -16,6 +17,7 @@ describe("noteEditorState", () => {
   it("is empty with nothing to save before the first note", () => {
     expect(state({})).toEqual({
       status: "empty",
+      error: undefined,
       length: 0,
       limit: MAX_NOTE_LENGTH,
       overLimit: false,
@@ -79,14 +81,32 @@ describe("noteEditorState", () => {
       draft: "ab",
       isSaving: true,
       error: "x",
+      submittedDraft: "ab",
     });
     expect(s.status).toBe("saving");
     expect(s.canSave).toBe(false);
   });
 
   it("shows the error over the unsaved state", () => {
-    const s = state({ savedBody: "a", draft: "ab", error: "Too long" });
+    const s = state({
+      savedBody: "a",
+      draft: "ab",
+      error: "Too long",
+      submittedDraft: "ab",
+    });
     expect(s.status).toBe("error");
+    expect(s.error).toBe("Too long");
     expect(s.canSave).toBe(true);
+  });
+
+  it("drops a failed save's error once the draft is edited", () => {
+    const s = state({
+      savedBody: "a",
+      draft: "abc",
+      error: "Too long",
+      submittedDraft: "ab",
+    });
+    expect(s.status).toBe("unsaved");
+    expect(s.error).toBeUndefined();
   });
 });
