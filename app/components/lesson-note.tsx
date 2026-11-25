@@ -38,7 +38,7 @@ export function LessonNote({ note }: { note: SavedNote }) {
             placeholder="Jot down key ideas, questions, or anything you want to remember from this lesson."
             aria-label="Your notes"
             aria-invalid={state.overLimit || undefined}
-            className="min-h-32 resize-y leading-relaxed"
+            className="min-h-32 resize-y leading-relaxed wrap-anywhere"
           />
           <NoteFooter state={state} />
         </fetcher.Form>
