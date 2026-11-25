@@ -43,7 +43,7 @@ export function LessonNote({ note }: { note: SavedNote }) {
             aria-label="Your notes"
             aria-invalid={state.overLimit || undefined}
             aria-describedby={`${statusId} ${counterId}`}
-            className="min-h-32 resize-y leading-relaxed wrap-anywhere"
+            className="max-h-96 min-h-32 resize-y leading-relaxed wrap-anywhere"
           />
           <NoteFooter state={state} counterId={counterId} />
         </fetcher.Form>
